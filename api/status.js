@@ -4,17 +4,23 @@ export default function handler(req, res) {
   const now = Date.now();
 
   if (req.method === "POST") {
-    const { user } = req.body;
+    const { user, room } = req.body;
     if (!user) return res.status(400).json({ error: "No user provided" });
 
-    onlinePlayers[user] = now;
+    onlinePlayers[user] = { timestamp: now, room: room || "Unknown" };
     return res.status(200).json({ success: true });
   }
 
   if (req.method === "GET") {
-    const active = Object.keys(onlinePlayers).filter(
-      u => now - onlinePlayers[u] < 30 * 1000
-    );
+    const requester = req.query.user;
+    if (!requester || !onlinePlayers[requester]) {
+      return res.status(403).json({ error: "You must send a POST first to access status." });
+    }
+
+    const active = Object.entries(onlinePlayers)
+      .filter(([_, v]) => now - v.timestamp < 30 * 1000)
+      .map(([u, v]) => ({ user: u, room: v.room }));
+
     return res.status(200).json({ active });
   }
 
