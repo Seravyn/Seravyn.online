@@ -2,169 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>seravyn</title>
+  <title>seravyn-os terminal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      height:100vh; width:100vw; overflow:hidden;
+      font-family:"Fira Code","Ubuntu Mono",monospace;
+      color:#e5e9f0;
     }
 
-    body {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      font-family: "Fira Code", "Ubuntu Mono", monospace;
-      color: #e5e9f0;
-    }
-    
     .desktop {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      background: #050816;
-      background-image: url("background.jpg");
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      position:relative; height:100%; width:100%;
+      background:#050816;
+      background-image:url("background.jpg");
+      background-position:center;
+      background-size:cover;
+      background-repeat:no-repeat;
     }
 
     .desktop::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
-      mix-blend-mode: multiply;
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(circle at top,rgba(0,0,0,0.1),rgba(0,0,0,0.8));
+      mix-blend-mode:multiply;
     }
 
     .terminal-window {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(900px, 90vw);
-      height: min(420px, 60vh);
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      overflow: hidden;
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(900px,90vw);
+      height:min(420px,65vh);
+      background:rgba(15,23,42,0.9);
+      border-radius:10px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.6);
+      overflow:hidden;
+      backdrop-filter:blur(4px);
+      display:flex; flex-direction:column;
+      border:1px solid rgba(148,163,184,0.4);
     }
 
     .terminal-header {
-      display: flex;
-      align-items: center;
-      padding: 8px 12px;
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid rgba(148,163,184,0.25);
+      display:flex; align-items:center;
+      padding:8px 12px;
+      background:rgba(15,23,42,0.97);
+      border-bottom:1px solid rgba(148,163,184,0.35);
     }
 
-    .traffic-lights {
-      display: flex;
-      gap: 6px;
-      margin-right: 10px;
-    }
-
+    .traffic-lights { display:flex; gap:6px; margin-right:10px; }
     .traffic-lights span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
+      width:10px; height:10px; border-radius:50%; display:inline-block;
     }
+    .red{background:#ef4444;} .yellow{background:#facc15;} .green{background:#22c55e;}
 
-    .traffic-lights .red    { background: #ef4444; }
-    .traffic-lights .yellow { background: #facc15; }
-    .traffic-lights .green  { background: #22c55e; }
-
-    .terminal-title {
-      font-size: 0.85rem;
-      color: #9ca3af;
-    }
+    .terminal-title { font-size:0.85rem; color:#9ca3af; }
 
     .terminal-body {
-      flex: 1;
-      padding: 12px 14px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      overflow-y: auto;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(129,140,248,0.12), transparent 60%);
+      flex:1; padding:12px 14px;
+      font-size:0.9rem; line-height:1.4;
+      overflow-y:auto;
+      background:radial-gradient(circle at top left,rgba(56,189,248,0.08),transparent 55%),
+                 radial-gradient(circle at bottom right,rgba(129,140,248,0.12),transparent 60%);
     }
 
-    .line {
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
+    .line { white-space:pre-wrap; word-break:break-word; }
 
     .prompt-line {
-      display: flex;
-      align-items: center;
-      margin-top: 4px;
+      display:flex; align-items:center; margin-top:4px;
     }
 
-    .prompt-label {
-      color: #22c55e;
-      margin-right: 6px;
-    }
+    .prompt-label { margin-right:6px; }
 
     #terminal-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #e5e9f0;
-      font: inherit;
+      flex:1; background:transparent; border:none; outline:none;
+      color:#e5e9f0; font:inherit;
     }
 
-    .hint {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-top: 6px;
-    }
-
-    .info-block {
-      margin-bottom: 8px;
-      color: #cbd5f5;
-    }
+    .hint { font-size:0.8rem; color:#9ca3af; margin-top:6px; }
 
     .palette {
-      display: flex;
-      gap: 6px;
-      margin-top: 8px;
+      display:flex; gap:6px; margin-top:8px;
     }
+    .palette span { width:26px; height:12px; border-radius:2px; }
 
-    .palette span {
-      width: 26px;
-      height: 12px;
-      border-radius: 2px;
-    }
+    .p1{background:#3b82f6;} .p2{background:#22c55e;} .p3{background:#eab308;}
+    .p4{background:#ec4899;} .p5{background:#8b5cf6;} .p6{background:#0ea5e9;}
+    .p7{background:#f97316;} .p8{background:#ef4444;}
 
-    .p1 { background:#3b82f6; }
-    .p2 { background:#22c55e; }
-    .p3 { background:#eab308; }
-    .p4 { background:#ec4899; }
-    .p5 { background:#8b5cf6; }
-    .p6 { background:#0ea5e9; }
-    .p7 { background:#f97316; }
-    .p8 { background:#ef4444; }
-
-    @media (max-width: 600px) {
-      .terminal-window {
-        height: 65vh;
-      }
-      .terminal-body {
-        font-size: 0.85rem;
-      }
+    @media (max-width:600px){
+      .terminal-window{height:70vh;}
+      .terminal-body{font-size:0.85rem;}
     }
   </style>
 </head>
 <body>
   <div class="desktop">
-    <div class="terminal-window">
+    <div class="terminal-window" id="terminal-window">
       <div class="terminal-header">
         <div class="traffic-lights">
           <span class="red"></span>
@@ -175,25 +108,23 @@
       </div>
 
       <div class="terminal-body" id="terminal-body">
-        <div class="info-block line">
-Seravyn!_OS 22.04 LTS  x86_64
-Kernel 6.1.0-20-generic
-Theme: Neon-Arc-Dark  GTK3
-Terminal: WebTTY (demo)
-GPU: WebGL Virtual Adapter
-Memory: 500GB
+        <div class="line">
+lain@seravyn-os
+user ^
+os name: seravyn os
         </div>
+
         <div class="palette">
           <span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span>
           <span class="p5"></span><span class="p6"></span><span class="p7"></span><span class="p8"></span>
         </div>
 
         <div class="line hint">
-Type <span style="color:#22c55e;">serverdata</span> and press enter to open the server page.
+Commands: serverdata, specs, neofetch, theme &lt;#rrggbb&gt;, clear.
         </div>
 
-        <div class="prompt-line">
-          <span class="prompt-label">lain@seravyn-os:~$</span>
+        <div class="prompt-line" id="prompt-line">
+          <span class="prompt-label" id="prompt-label">lain@seravyn-os:~$</span>
           <input id="terminal-input" autocomplete="off" autofocus />
         </div>
       </div>
@@ -203,26 +134,123 @@ Type <span style="color:#22c55e;">serverdata</span> and press enter to open the 
   <script>
     const input = document.getElementById("terminal-input");
     const bodyEl = document.getElementById("terminal-body");
+    const termWindow = document.getElementById("terminal-window");
+    const promptLabel = document.getElementById("prompt-label");
 
-    function addOutput(text) {
+    let accent = "#22c55e";
+    updateTheme(accent);
+
+    function addLine(text, cssColor) {
       const line = document.createElement("div");
       line.className = "line";
+      if (cssColor) line.style.color = cssColor;
       line.textContent = text;
-      bodyEl.insertBefore(line, bodyEl.querySelector(".prompt-line"));
+      bodyEl.insertBefore(line, document.getElementById("prompt-line"));
       bodyEl.scrollTop = bodyEl.scrollHeight;
     }
 
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        const cmd = input.value.trim();
-        addOutput("akshay@pop-os:~$ " + cmd);
-        input.value = "";
+    function clearConsole() {
+      const prompt = document.getElementById("prompt-line");
+      bodyEl.innerHTML = "";
+      bodyEl.appendChild(prompt);
+    }
 
-        if (cmd.toLowerCase() === "serverdata") {
+    function updateTheme(color) {
+      accent = color;
+      promptLabel.style.color = accent;
+      document.querySelectorAll(".traffic-lights .green").forEach(e => e.style.background = accent);
+      termWindow.style.borderColor = color + "80";
+      document.body.style.setProperty("--accent", color);
+    }
+
+    function runSpecs() {
+      const text =
+`Seravyn!_OS 22.04 LTS  x86_64
+Kernel 6.1.0-20-generic
+Theme: Neon-Arc-Dark  GTK3
+Terminal: WebTTY (demo)
+GPU: WebGL Virtual Adapter
+Memory: 500GB`;
+      text.split("\n").forEach(line => addLine(line));
+    }
+
+    function runNeofetch() {
+      const art = [
+"                 .-'''-.                 ",
+"               .'  _    \\                ",
+"   _______    /   /` '.   \\   _______    ",
+"  /   __  \\  .   |     \\  '  /   __  \\   ",
+"  | ,_/  \\__) |   '      |  ' | ,_/  \\__) ",
+",-./  )       \\    \\     / /,-./  )       ",
+"\\  '_ '`)      `.   ` ..' / \\  '_ '`)     ",
+" > (_)  )  __     '-...-'`   > (_)  )  __ ",
+"(  .  .-'_/  )                (  .  .-'_/  )",
+" `-'`-'     /                  `-'`-'     /",
+"   `._____.'                    `._____.' "
+      ];
+      art.forEach(l => addLine(l, accent));
+
+      addLine("");
+      addLine("lain@seravyn-os", accent);
+      addLine("---------------");
+      addLine("OS: Seravyn!_OS 22.04 LTS x86_64");
+      addLine("Host: seravyn-os");
+      addLine("Kernel: 6.1.0-20-generic");
+      addLine("Shell: websh 1.0");
+      addLine("Resolution: 1920x1080");
+      addLine("DE: seravyn-shell");
+      addLine("Theme: Neon-Arc-Dark [GTK3]");
+      addLine("Terminal: WebTTY");
+      addLine("CPU: Virtual JS Engine");
+      addLine("GPU: WebGL Virtual Adapter");
+      addLine("Memory: 500GB");
+    }
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+
+      const cmd = input.value.trim();
+      addLine(promptLabel.textContent + " " + cmd);
+      input.value = "";
+
+      if (!cmd) return;
+
+      const [base, arg] = cmd.split(/\s+/, 2);
+
+      switch (base.toLowerCase()) {
+        case "serverdata":
           window.location.href = "https://seravyn.online/serverdata";
-        } else if (cmd) {
-          addOutput("Command not found: " + cmd);
-        }
+          break;
+
+        case "specs":
+          runSpecs();
+          break;
+
+        case "neofetch":
+          runNeofetch();
+          break;
+
+        case "theme":
+          if (!arg) {
+            addLine("usage: theme #rrggbb");
+          } else {
+            const color = arg.toLowerCase();
+            const hexMatch = /^#([0-9a-f]{6})$/i;
+            if (hexMatch.test(color)) {
+              updateTheme(color);
+              addLine("theme set to " + color);
+            } else {
+              addLine("invalid color. use #rrggbb");
+            }
+          }
+          break;
+
+        case "clear":
+          clearConsole();
+          break;
+
+        default:
+          addLine("command not found: " + base);
       }
     });
   </script>
