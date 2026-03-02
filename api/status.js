@@ -15,6 +15,7 @@ export default function handler(req, res) {
     const requester = req.query.user;
     if (!requester || !onlinePlayers[requester]) {
       return res.status(403).json({ error: "This is a API you cannot visit this locally." });
+      return res.status(403).json({ error: "Error: 403" });
     }
 
     const active = Object.entries(onlinePlayers)
