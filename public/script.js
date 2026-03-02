@@ -1,6 +1,6 @@
 const texts = [
     "owner of seravyn software",
-    "building aesthetic & sleep projects",
+    "building aesthetic & sleek projects",
     "always working on something",
     "ghost <3 | 01/22/26"
 ];
