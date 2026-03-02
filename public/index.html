@@ -1,17 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seravyn Terminal</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Web Desktop Terminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: "Fira Code", "Ubuntu Mono", monospace;
+      color: #e5e9f0;
+    }
+    
+    .desktop {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background: #050816;
+      background-image: url("background.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .desktop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+      mix-blend-mode: multiply;
+    }
+
+    .terminal-window {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(900px, 90vw);
+      height: min(420px, 60vh);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+      margin-right: 10px;
+    }
+
+    .traffic-lights span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .traffic-lights .red    { background: #ef4444; }
+    .traffic-lights .yellow { background: #facc15; }
+    .traffic-lights .green  { background: #22c55e; }
+
+    .terminal-title {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .terminal-body {
+      flex: 1;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      overflow-y: auto;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(129,140,248,0.12), transparent 60%);
+    }
+
+    .line {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .prompt-label {
+      color: #22c55e;
+      margin-right: 6px;
+    }
+
+    #terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e5e9f0;
+      font: inherit;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .info-block {
+      margin-bottom: 8px;
+      color: #cbd5f5;
+    }
+
+    .palette {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .palette span {
+      width: 26px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .p1 { background:#3b82f6; }
+    .p2 { background:#22c55e; }
+    .p3 { background:#eab308; }
+    .p4 { background:#ec4899; }
+    .p5 { background:#8b5cf6; }
+    .p6 { background:#0ea5e9; }
+    .p7 { background:#f97316; }
+    .p8 { background:#ef4444; }
+
+    @media (max-width: 600px) {
+      .terminal-window {
+        height: 65vh;
+      }
+      .terminal-body {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="terminal">
-Seravyn OS v1.0
-Type 'serverdata' to access server info.
-</div>
-<input id="command" autofocus autocomplete="off" />
-<script src="script.js"></script>
+  <div class="desktop">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="traffic-lights">
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </div>
+        <div class="terminal-title">akshay@pop-os: ~</div>
+      </div>
+
+      <div class="terminal-body" id="terminal-body">
+        <div class="info-block line">
+Pop!_OS 22.04 LTS  x86_64
+Kernel 6.1.0-20-generic
+Theme: Neon-Arc-Dark  GTK3
+Terminal: WebTTY (demo)
+GPU: WebGL Virtual Adapter
+Memory: 8192MiB
+        </div>
+        <div class="palette">
+          <span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span>
+          <span class="p5"></span><span class="p6"></span><span class="p7"></span><span class="p8"></span>
+        </div>
+
+        <div class="line hint">
+Type <span style="color:#22c55e;">serverdata</span> and press Enter to open the server page.
+        </div>
+
+        <div class="prompt-line">
+          <span class="prompt-label">akshay@pop-os:~$</span>
+          <input id="terminal-input" autocomplete="off" autofocus />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("terminal-input");
+    const bodyEl = document.getElementById("terminal-body");
+
+    function addOutput(text) {
+      const line = document.createElement("div");
+      line.className = "line";
+      line.textContent = text;
+      bodyEl.insertBefore(line, bodyEl.querySelector(".prompt-line"));
+      bodyEl.scrollTop = bodyEl.scrollHeight;
+    }
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim();
+        addOutput("akshay@pop-os:~$ " + cmd);
+        input.value = "";
+
+        if (cmd.toLowerCase() === "serverdata") {
+          window.location.href = "https://seravyn.online/serverdata";
+        } else if (cmd) {
+          addOutput("Command not found: " + cmd);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
