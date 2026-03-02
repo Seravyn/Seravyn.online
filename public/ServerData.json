@@ -1,0 +1,15 @@
+{
+  "admins": [
+    {
+      "name": "lain",
+      "user-id": "8C9D389BFBEB4A55"
+    },
+    {
+      "name": "astra",
+      "user-id": "EA04C615E73A85EB"
+    }
+  ],
+  "super-admins": [
+    "8C9D389BFBEB4A55"
+  ]
+}
