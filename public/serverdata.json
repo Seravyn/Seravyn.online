@@ -17,9 +17,9 @@
 
   "patreon": [],
 
-  "poll": "What do you like ",
-  "option-a": "Fries",
-  "option-b": "Chips",
+  "poll": "How do you like this menu",
+  "option-a": "Good",
+  "option-b": "Bad",
 
   "detected-mods": [],
 
