@@ -14,7 +14,7 @@ export default function handler(req, res) {
   if (req.method === "GET") {
     const requester = req.query.user;
     if (!requester || !onlinePlayers[requester]) {
-      return res.status(403).json({ error: "You must send a POST first to access status." });
+      return res.status(403).json({ error: "This is a API you cannot visit this locally." });
     }
 
     const active = Object.entries(onlinePlayers)
