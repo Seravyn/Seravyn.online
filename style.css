@@ -1,1 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    color: #fff;
+}
+
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: -1;
+}
+
+.card {
+    background: rgba(18, 18, 18, 0.55);
+    backdrop-filter: blur(20px);
+    padding: 50px 70px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.7);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.verified {
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
+
+.bio {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.85;
+    height: 22px;
+    letter-spacing: 0.3px;
+}
+
+.cursor::after {
+    content: "|";
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+}
