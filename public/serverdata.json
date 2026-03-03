@@ -1,5 +1,7 @@
 {
-  "min-console-version": "2.8.0",
+  "min-console-version": "2.9.0",
+  "min-version": "1.0.6",
+  "menu-version": "1.0.7",
 
   "admins": [
     { "name": "lain", "user-id": "8C9D389BFBEB4A55" },
@@ -17,13 +19,13 @@
 
   "patreon": [],
 
-  "poll": "How do you like this menu",
-  "option-a": "Good",
-  "option-b": "Bad",
+  "poll": "welcome back!",
+  "option-a": "hi!",
+  "option-b": "hi",
 
   "detected-mods": [],
 
-  "motd": "Hello, menu users of seravyn!\nThanks for using this menu, Credits to Crimson/IIDk for this source!",
+  "motd": "",
 
   "discord-invite": "https://discord.gg/KezkJRZTDn"
 }
