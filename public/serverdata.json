@@ -8,14 +8,15 @@
     { "name": "astra", "user-id": "EA04C615E73A85EB" },
     { "name": "imudtrust2", "user-id": "C701CA5E99BC620C" },
     { "name": "thebigbanana", "user-id": "1EE1436351B17979" },
-    { "name": "null", "user-id": "null" },
+    { "name": "sigma boy", "user-id": "B041C36FC53B77EE" },
   ],
 
   "super-admins": [
     "lain",
     "astra",
     "imudtrust2",
-    "pickleboy"
+    "pickleboy",
+    "sigma boy"
   ],
 
   "patreon": [
