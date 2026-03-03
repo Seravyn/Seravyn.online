@@ -5,6 +5,14 @@ const texts = [
     "ghost <3 | 01/22/26"
 ];
 
+const bgVideo = document.getElementById("bg-video");
+function enableAudio() {
+    bgVideo.muted = false;
+    bgVideo.play().catch(() => {});
+    document.removeEventListener("click", enableAudio);
+}
+document.addEventListener("click", enableAudio);
+
 const element = document.getElementById("typewriter");
 
 let textIndex = 0;
