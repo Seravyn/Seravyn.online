@@ -7,6 +7,10 @@
     {
       "source": "/serverdata",
       "destination": "/serverdata.json"
+    },
+    {
+      "source": "/",
+      "destination": "/index.json"
     }
   ]
 }
