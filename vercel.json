@@ -3,5 +3,6 @@
     { "source": "/", "destination": "index.json" },
     { "source": "/l", "destination": "/l.html" },
     { "source": "/serverdata", "destination": "/serverdata.json" }
+    { "source": "/download", "destination": "/download.html" }
   ]
 }
