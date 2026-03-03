@@ -19,8 +19,8 @@ let textIndex = 0;
 let charIndex = 0;
 let deleting = false;
 
-const typingTime = 4000;
-const deletingTime = 4000;
+const typingTime = 5500;
+const deletingTime = 8000;
 
 function loop() {
     const current = texts[textIndex];
