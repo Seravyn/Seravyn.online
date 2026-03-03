@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>seravyn - download</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+  }
+
+  video#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-panel h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .glass-panel p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .download-btn {
+    background: linear-gradient(135deg, #ff4a4a, #ff8a00);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 138, 0, 0.4);
+  }
+
+  .download-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 138, 0, 0.6);
+  }
+</style>
+</head>
+<body>
+<video id="bg-video" autoplay muted loop>
+  <source src="background.mp4" type="video/mp4">
+</video>
+
+<div class="glass-panel">
+  <h1>Download - title</h1>
+  <p>Are you looking for the best II-Stupid-Menu Fork since IIDk quit? Look no further @Seravyn</p>
+  <button class="download-btn">Download</button>
+</div>
+</body>
+</html>
