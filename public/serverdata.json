@@ -1,31 +1,27 @@
 {
-  "min-console-version": "2.9.0",
-  "min-version": "1.0.6",
-  "menu-version": "1.0.7",
-
+  "menu-version": "4.8.0",
+  "min-version": "4.5.1",
+  "min-console-version": "2.8.0",
+  "discord-invite": "https://discord.gg/lainscave",
+  "motd": "You are using build {0}. This menu was created by Lain. This menu is completely free and open sourced, if you paid for this menu you have been scammed. There are a total of <b>{1}</b> mods on this menu. <color=red>Seravyn is not responsible for any bans using this menu.</color> If you get banned while using this, it's your responsibility.\n\nCurrent status: <b>Fully functional, undetected</b>\nMade with <3 by lain.\n\n<alpha=128>{2} {0} {3}<alpha=255>",
   "admins": [
-    { "name": "lain", "user-id": "8C9D389BFBEB4A55" },
-    { "name": "astra", "user-id": "EA04C615E73A85EB" },
-    { "name": "thebigbanana", "user-id": "1EE1436351B17979" },
-    { "name": "sigma boy", "user-id": "B041C36FC53B77EE" }
+    {
+      "name": "lain",
+      "user-id": "FF912EF4590C7E35",
+      "discord-id": "638051543316430858"
+    }
   ],
-
   "super-admins": [
-    "lain",
-    "astra",
-    "pickleboy",
-    "sigma boy"
+    "lain"
   ],
-
-  "patreon": [
-  ],
-
-  "poll": "welcome back!",
-  "option-a": "hi!",
-  "option-b": "hi",
-
+  "april_fools": {
+    "sex": false
+  },
+  "patreon": [],
   "detected-mods": [],
-  "motd": "Welcome to <color=#C080FF>Seravyn!</color> Made by: <color=#C080FF>ImUdTrust, Lain</color> | Credits to: <color=#C080FF>KingofNetflix</color> \n\nWe hope you have a <color=#88E788>good</color> time using this menu.\n\n Warning: <color=#FF0000>Crimson</color> has NOTHING to do with this menu. Use it at your own <color=#FF0000>risk!</color>\n\nThis menu comes packed with <color=#88E788>1000+</color> mods and counting. Have fun!",
-
-  "discord-invite": "https://discord.gg/KezkJRZTDn"
+  "poll": {
+    "question": "Do you use the Friend system inside the menu?",
+    "option-a": "Yes",
+    "option-b": "No"
+  }
 }
